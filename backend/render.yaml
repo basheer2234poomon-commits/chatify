@@ -3,7 +3,7 @@ services:
     name: chatify-backend
     env: node
     plan: free
-    buildCommand: npm install
+    buildCommand: npm ci --prefer-offline --no-audit
     startCommand: npm start
     envVars:
       - key: MONGODB_URI
@@ -14,3 +14,5 @@ services:
         value: ${JWT_SECRET}
       - key: NODE_ENV
         value: production
+      - key: NODE_OPTIONS
+        value: --experimental-modules

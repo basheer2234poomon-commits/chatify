@@ -246,6 +246,47 @@ https://chatify-app.vercel.app
 | Frontend shows blank | Check Vercel env variables are correct |
 | Messages not sending | Check browser console (F12) for errors |
 | Images not uploading | Click 📎 button - should work fine |
+| **`ERR_MODULE_NOT_FOUND` socket.io error** | **See Socket.io Fix below** ⬇️ |
+
+---
+
+## **Fix: `ERR_MODULE_NOT_FOUND` - Socket.io Module Error**
+
+If you see this error in Render logs:
+```
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '.../node_modules/socket.io/dist/index.js'
+```
+
+### **Solution (Do All 3 Steps):**
+
+**Step 1:** In Render dashboard → `chatify-backend` → **Settings**
+- Change **Build Command** from `npm install` to:
+  ```
+  npm ci --prefer-offline --no-audit
+  ```
+- Click **Save Changes**
+
+**Step 2:** Clear Render's cache:
+- In **Settings** tab, scroll down
+- Click **"Clear Build Cache"**
+
+**Step 3:** Redeploy:
+- Click blue **"Deploy"** button
+- Wait 5-10 minutes ⏳
+
+**If that doesn't work**, try updating socket.io:
+
+1. On your computer, open PowerShell in `backend` folder:
+   ```bash
+   npm install socket.io@latest
+   git add .
+   git commit -m "Update socket.io"
+   git push
+   ```
+
+2. Redeploy on Render (click Deploy button)
+
+---
 
 ---
 
