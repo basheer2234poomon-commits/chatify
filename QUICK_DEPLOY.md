@@ -247,6 +247,7 @@ https://chatify-app.vercel.app
 | Messages not sending | Check browser console (F12) for errors |
 | Images not uploading | Click 📎 button - should work fine |
 | **`ERR_MODULE_NOT_FOUND` socket.io error** | **See Socket.io Fix below** ⬇️ |
+| **Vercel: "Secret does not exist" error** | **See Vercel Env Variables Fix below** ⬇️ |
 
 ---
 
@@ -287,6 +288,43 @@ Error [ERR_MODULE_NOT_FOUND]: Cannot find module '.../node_modules/socket.io/dis
 2. Redeploy on Render (click Deploy button)
 
 ---
+
+## **Fix: Vercel Environment Variables - "Secret does not exist" Error**
+
+If you see this error:
+```
+Environment Variable "VITE_API_BASE_URL" references Secret "VITE_API_BASE_URL", which does not exist.
+```
+
+### **Solution:**
+
+1. **Go to Vercel Dashboard** → Select `chatify-app` project
+2. Click **Settings** → **Environment Variables**
+3. **Delete these if they exist:**
+   - ❌ `VITE_API_BASE_URL`
+   - ❌ `VITE_SOCKET_URL`
+
+4. **Re-add them correctly** (Regular Environment Variables, NOT Secrets):
+   
+   First one:
+   - **Name:** `VITE_API_BASE_URL`
+   - **Value:** `https://chatify-backend.onrender.com/api`
+   - **Select environments:** `Production` and `Preview`
+   - Click **Save**
+   
+   Second one:
+   - **Name:** `VITE_SOCKET_URL`
+   - **Value:** `https://chatify-backend.onrender.com`
+   - **Select environments:** `Production` and `Preview`
+   - Click **Save**
+
+5. **Redeploy:**
+   - Go to **Deployments** tab
+   - Click the three dots `...` on the latest deployment
+   - Select **Redeploy**
+   - Wait 1-2 minutes
+
+✅ Should work now!
 
 ---
 
