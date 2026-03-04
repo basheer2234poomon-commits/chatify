@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: chatify-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGODB_URI
+        scope: build
+        value: ${MONGODB_URI}
+      - key: JWT_SECRET
+        scope: build
+        value: ${JWT_SECRET}
+      - key: NODE_ENV
+        value: production
