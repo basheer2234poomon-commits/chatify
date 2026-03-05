@@ -18,6 +18,7 @@ dotenv.config();
 
 const app = express();
 const httpServer = createServer(app);
+const cors = require("cors");
 const io = new Server(httpServer, {
   cors: {
     origin: process.env.NODE_ENV === 'production' ? 'your-frontend-url' : 'http://localhost:5173',
